@@ -6,19 +6,21 @@
 .header{
     max-width: 100%;
     box-shadow: 5px 5px 20px gray;
-    height:200px;
-    
+    height:150px;
   }
   
   .topnavrow div{
     display: inline-block;
   }
+
+  .top-align{
+    padding-top: 40px;
+  }
   
   .brand{
     color: white;
-    margin-left: 2%;
-    padding: 0.8em;
-    width: 10%;
+    width: 80%;
+    text-align: center;
   }
   
   .inp-container input{
@@ -80,8 +82,9 @@
   .cart-wishlist
   {
     width:7%;
-    margin-top:1.7em;
+    margin-top: 12px;
     margin-left:1em;
+
   }
 
   .list-icon{
@@ -94,8 +97,8 @@
     position:absolute;
     height:1em;
     width: 1em;
-    left: 83%;
-    top:1.8%;
+    // left: 83%;
+    // top:1.8%;
     text-align: center;
     line-height: 90%;
     p{
