@@ -46,6 +46,11 @@ rendering across all device sizes
 affecting the child component behaviour 
 
 
+//Debate:
+unless u have a lot of variables being shared across components in an application,
+dont use redux or context api 
+use prop drilling + binding change handlers + usestate  ( this works with natural flow of react )
+
 Flux architecture:
 
  sockets => unix 
@@ -88,4 +93,8 @@ this will allow us to share variables between the main component and all the chi
 
 localStorage => setState in combination with localStorage ( not advisable as a security practice )
 
+
+Context: Store/reference which provides information to the children components ( Provider of information)
+Provider=>
+   Consumers within the Provider can access the information (Consumer in your component )
 

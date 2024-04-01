@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import React, { useState } from 'react'
+import CategoriesContext from './Context/CategoriesContext';
 
 // import the library
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -18,7 +20,6 @@ import MainComponent from './components/MainComponent/MainComponent';
 import LandingPage from './components/LandingPage';
 import ProductDetails from './components/ProductDetails';
 import Cart from './components/Cart';
-import { useState } from 'react';
 
 
 // import your icons
@@ -26,8 +27,12 @@ function App() {
 
   let [cartCount,setCartCount ] =useState(0);
   library.add(fab, fas, far)
-  return (
-    <div className="App">
+
+
+  
+  
+  return  (
+    <div className='App'>
 <TopNav  />
 <CatNav />
 <Routes>
@@ -36,9 +41,9 @@ function App() {
   <Route path="/" element={<LandingPage  />} />
   <Route path="/productdetails" element={<ProductDetails />} />
 </Routes>
-
-    </div>
+  </div>
   );
+
 }
 
 export default App;

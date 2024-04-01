@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import accordionSlice from '../../Redux/Accordion/accordionSlice'
 import { getCategories } from '../../Redux/Category/actions'
 import { filterByPrice, filterProducts } from '../../Redux/Product/productSlice'
-const SideNav = ({setNumberOfProducts}) => {
+import CategoriesContext from '../../Context/CategoriesContext'
+const SideNav = ({setNumberOfProducts,showProducts,setShowProducts}) => {
 
     let accordionData= useSelector(state=>state.categoryReducer.categories);
     let  fetchedProductData= useSelector(state=>state.productReducer)
@@ -14,7 +15,8 @@ const SideNav = ({setNumberOfProducts}) => {
      //categories,setCategories
     let [minPriceLimit,setMinPriceLimit]= useState(50);
     let [maxPriceLimit,setMaxPriceLimit]= useState(130);
-
+  
+    //let [showProductProxy,setShowProductProxy] = useState(false);
 
     
     const dispatch= useDispatch();
@@ -42,13 +44,24 @@ const SideNav = ({setNumberOfProducts}) => {
         console.log(products);
     }
 
-  return (
-    <div className='side-nav'>
 
+
+  return (
+
+   
+   
+    
+   
+
+    <div className='side-nav'>
+    
+   
         <div className='section-title'>
             <h3>Category</h3>
             <p>{stateVar}</p>
             <p>Set number of products: <input type="number" onChange={(e)=>setNumberOfProducts(e.target.value)} />    </p>
+            <button onClick={()=>{setShowProducts(!showProducts)}}> Click to show or hide products</button>
+    
             <button onClick={()=>{setStateVar(20)}}>Click me</button>
         </div>
 
@@ -151,8 +164,16 @@ if(eachData.parent_category_id==null)
 
          </div>
 
+ 
                </div>
+               {value => <p> The watches are  { value } </p>}
+ 
+
+           
+            
     </div>
+   
+    
   )
 }
 

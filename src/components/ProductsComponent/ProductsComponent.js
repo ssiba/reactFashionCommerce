@@ -9,6 +9,15 @@ import { Link } from 'react-router-dom';
 //variable destructuring of props
 const Products=({typeOfProducts,showProducts, changeMainComponentVariable,numberOfProducts})=>{
 
+if(typeOfProducts)
+{
+   
+}
+if(showProducts)
+{
+
+}
+
       //local state , global state
 
     //local => variables within the component and the view  =>useState 
