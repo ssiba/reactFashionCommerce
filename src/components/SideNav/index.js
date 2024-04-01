@@ -3,7 +3,7 @@ import './_side-nav.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import accordionSlice from '../../Redux/Accordion/accordionSlice'
 import { getCategories } from '../../Redux/Category/actions'
-import { filterByPrice, filterProducts } from '../../Redux/Product/productSlice'
+import { filterByPrice, filterProducts, sortByName, sortByPrice  } from '../../Redux/Product/productSlice'
 const SideNav = () => {
 
     let accordionData= useSelector(state=>state.categoryReducer.categories);
@@ -141,6 +141,10 @@ if(eachData.parent_category_id==null)
            
 
          </div>
+         <div>
+                    <button className='btn btn-outline-dark  my-3' onClick={() => { dispatch(sortByName({ products: products })) }}> Sort By Name</button>
+                    <button className='btn btn-outline-dark  my-3' onClick={() => { dispatch(sortByPrice({ products: products })) }}> Sort By Price</button>
+                </div>
 
                </div>
     </div>

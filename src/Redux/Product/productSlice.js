@@ -35,9 +35,18 @@ const productSlice= createSlice({
 
    state.products=filteredData;
 
-  }
+  },
+  sortByName: (state, action) => {
+   let sortByNameData = [...action.payload.products];
+   sortByNameData.sort((a, b) => a.product_name.localeCompare(b.product_name));
+   state.products = sortByNameData;
 },
-
+sortByPrice: (state, action) => {
+   let sortByPriceData = [...action.payload.products];
+   sortByPriceData.sort((a, b) => a.price - b.price);
+   state.products = sortByPriceData;
+}
+},
   extraReducers:{
    [getProducts.pending]: (state,action)=>{
       state.status="Loading...";
@@ -56,5 +65,5 @@ const productSlice= createSlice({
 
 });
 
-export const {filterProducts,filterByPrice}= productSlice.actions;
+export const {filterProducts,filterByPrice,sortByName,sortByPrice}= productSlice.actions;
 export default productSlice.reducer;
