@@ -1,9 +1,11 @@
 import React from 'react'
 import { Routes ,Route  } from 'react-router-dom';
 import MainComponent from '../MainComponent/MainComponent';
-
+//fragment will not affect the css, div can
 const LandingPage = () => {
   return (
+
+
     <div>
         <Routes>
 
@@ -11,6 +13,8 @@ const LandingPage = () => {
 
         </Routes>
     </div>
+
+    
   )
 }
 

@@ -55,7 +55,10 @@ if(showProducts)
 
 
       product={...product,quantity:1};
+
+       //  dispatch("cartSlice/addCartItem",{product});
         dispatch(addCartItem(product));
+        //will be sent to the reducers from the store 
     }
 
 

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import  './_top-nav.scss'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 //import {GoogleLogin} from "react-google-login"
 //import {gapi} from 'gapi-script';
 const TopNav = function()
@@ -14,7 +15,12 @@ const TopNav = function()
 
     console.log(res);
   }
+
+  //useState accessing and setting data within a component (state)
+
+  //state referenced in useSelector is exclusive to only redux
   const cartItemCount= useSelector(state=>state.cartReducer.totalItems);
+
 //console.log("count",cartItemCount);
     return(
         <div className='header bg-dark'>

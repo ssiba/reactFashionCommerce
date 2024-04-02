@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { deleteCartItem, updateCartItemQuantity } from '../../../Redux/Cart/cartSlice';
 const FilledCart = () => {
 
+    //cart= Redux state 
     const cart= useSelector(state=>state.cartReducer);
 const dispatch = useDispatch();
     const quantityHandler =(sign,item,key)=>{

@@ -98,3 +98,149 @@ Context: Store/reference which provides information to the children components (
 Provider=>
    Consumers within the Provider can access the information (Consumer in your component )
 
+
+Store
+All data in Redux is managed in stores that manage the global state.
+ Theoretically, applications could have many different stores. 
+ Flux architecture even encourages the use of multiple stores.
+  However, in most React applications using Redux, we’ll only find a single store.
+   This reduces complexity dramatically and also declares this single store as the single source of truth (SSOT)
+    for all of our data. The store also provides some methods that can be used to change (dispatch) the data currently 
+    stored in the store, read (getState) the data from the store, 
+and react to changes (subscribe).
+
+
+Redux:
+The only way to change data in a store is to “dispatch” an action.  
+Redux has taken its inspiration from Flux architecture and requires that these 
+actions be in Flux Standard Action (FSA) format. FSAs consist of a simple JavaScript object which always must have a type property 
+and can contain payload, meta, and error properties. We are going to focus mostly on the payload.
+
+//reflection type of the class, variables it has, functions it has 
+//js/ts : typeof 
+type: (metadata)
+payload 
+
+stock market application 
+dispatch a ticker update 
+ticker=> stock price has changed from 150rs to 145rs 
+
+
+//updated every 15secs  
+type:"ticker"
+{
+  stockName:"BroForge"
+  priceBefore:150
+  priceAfter:145
+  timeOfReport:"02-04-2024 2:55PM"
+
+}
+
+which view should subscribe to this update in a stock market application 
+dashboard where the stock prices are actively updated 
+
+stock prices 
+stock market application 
+cricket application where live scores are shown 
+
+
+
+
+Once an action has been dispatched (the store provides this dispatch method for us), the current state as well as the action dispatched are passed to the reducer. 
+
+which acts as the interface between the store of information in redux and the views 
+
+The reducer is a pure function in React. 
+
+Its primary aim is to create a new state based on the current state and the action’s type and payload properties. Remember that a pure function always creates the same output, given the same input parameters, no matter how many times it is called. This behavior makes reducers predictable and easy to test.
+
+
+Reducers
+Once an action has been dispatched (the store provides this dispatch method for us), the current state as well as the action dispatched are passed to the reducer. The reducer is a pure function in React. Its primary aim is to create a new state based on the current state and the action’s type and payload properties. Remember that a pure function always creates the same output, given the same input parameters, no matter how many times it is called. This behavior makes reducers predictable and easy to test.
+
+Below is an example of a reducer:
+
+
+//2
+//3
+
+plus=>state=2+3
+minus=>state=2-3
+palus 
+unhandled action type 
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'PLUS': {
+      return state + action.payload;
+    }
+    case 'MINUS': {
+      return state - action.payload;
+    }
+    default: {
+      return 0;
+    }
+  }
+};
+A store generally expects only a single reducer.
+ Redux allows us to split the reducer function into many small parts, making them more digestible and easy to read.
+  A combineReducers() function then takes care of merging all these parts into one main reducer:
+   the root reducer. When an action is dispatched, each reducer is called with the same parameters: state and the action.
+
+Each reducer reacts to the type property of an action. Due to this, convention is to extract all used types into variables with the same name,
+ which allows us to avoid typos. Why is that? 
+ Typos can be difficult to spot (for example, USER_ADDDED) when using many different variables. 
+ In addition, the JavaScript interpreter will throw an error if we try to access a variable that is not defined, 
+ eliminating another error we’d have to track down. 
+ So, we’ll often find the following code blocks at the beginning of a file in Redux applications:
+
+const PLUS = 'PLUS';
+const MINUS = 'MINUS';
+
+//we can handle reducers logic in both sync and async way 
+//when we want to use sync,use reducers 
+//when we want to use in the async way , use "@reduxjs/toolkit" middleware,
+//so, for time consuming operations (network or high computation), it is better to use async methods 
+
+    
+
+
+s is the action type string in this case. Whenever this function is dispatched from a component within our application, createAsyncThunk generates promise lifecycle action types using this string as a prefix:
+
+pending: posts/getPosts/pending
+fulfilled: posts/getPosts/fulfilled
+rejected: posts/getPosts/rejected
+On its initial call, createAsyncThunk dispatches the posts/getPosts/pending lifecycle action type. The payloadCreator then executes to return either a result or an error.
+
+In the event of an error, posts/getPosts/rejected is dispatched and createAsyncThunk should either return a rejected promise containing an Error instance, a plain descriptive message, or a resolved promise with a RejectWithValue argument as returned by the thunkAPI.rejectWithValue function (more on thunkAPI and error handling momentarily).
+
+If our data fetch is successful, the posts/getPosts/fulfilled action type gets dispatched
+
+
+const initialState = 0;
+
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'PLUS': {
+      return state + (action.payload || 0);
+    }
+    case 'MINUS': {
+      return state - (action.payload || 0);
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+const store = createStore(counterReducer);
+
+
+
+we want the component state to change regardless of being viewed or not 
+
+asynchronous data management 
+
+
+
+

@@ -14,12 +14,21 @@ const cartSlice = createSlice({
    reducers:{
 
     addCartItem: (state,action)=> {
+
+      //FSA format => meta,payload
+       console.log("Action type called is:"+action.type); //unique string
+       console.log("Action product called is:"+JSON.stringify(action.payload));
+       
+       
         let item_exists= state.cartItems.find(item=> item.id === action.payload.id);
+
+        
       
+        console.log("existing item is:"+item_exists);
         if(!item_exists)
         {
 
-       
+     //  state.var1= "blah blah";
         state.cartItems= [...state.cartItems,action.payload];
        state.totalQuantity = ++state.totalQuantity;
        
@@ -28,6 +37,30 @@ const cartSlice = createSlice({
         state.totalItems = ++state.totalItems;
        
        }
+
+       else //if item already exists
+        {
+
+         let newCartItems=[];
+         for(let i=0;i< state.cartItems.length;i++)
+         {
+         
+            let element = state.cartItems[i];
+            if(element.id==action.payload.id)
+            {
+
+                element.quantity =element.quantity+1;
+            }
+            newCartItems.push(element);
+         }
+         state.cartItems=newCartItems;
+         state.totalQuantity = ++state.totalQuantity;
+       state.totalItemsPrice = state.totalItemsPrice + action.payload.price;
+        state.totalItems = ++state.totalItems;
+       
+
+       }
+
     
     },
     deleteCartItem: (state,action)=> {
@@ -82,5 +115,6 @@ const cartSlice = createSlice({
 })
 
 
+//in actions, an action is created for the exported reducer=>addCartItem and its value is cartSlice/addCartItem
 export const {addCartItem, deleteCartItem,updateCartItemQuantity}=cartSlice.actions;
 export default cartSlice.reducer;
