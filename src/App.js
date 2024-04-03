@@ -25,6 +25,45 @@ import Cart from './components/Cart';
 // import your icons
 function App() {
 
+  class ErrorBoundary extends React.Component {
+
+    //useState where state is for the class component's state
+    state = {
+      hasError: false,
+      error:"default error"
+    };
+  
+    //change the state over here
+    static getDerivedStateFromError(error) {
+      return {
+        hasError: true
+        
+      };
+    }
+  
+  
+    //do something with the error
+    componentDidCatch(error, info) {
+  
+      
+      this.state.error= error; 
+    
+      console.log("Error caused is:"+error, info);
+    }
+  
+  
+    //render conditionally based on the error
+    render() {
+      if (this.state.hasError) {
+        return <h1>An error has occurred:{this.state.error}.</h1>;
+        
+      }
+      //else
+      return this.props.children ;
+    }
+  }
+  
+
   let [cartCount,setCartCount ] =useState(0);
   library.add(fab, fas, far)
 
@@ -32,6 +71,7 @@ function App() {
   
   
   return  (
+    <ErrorBoundary>
     <div className='App'>
 <TopNav  />
 <CatNav />
@@ -42,6 +82,7 @@ function App() {
   <Route path="/productdetails" element={<ProductDetails />} />
 </Routes>
   </div>
+  </ErrorBoundary>
   );
 
 }
