@@ -13,6 +13,26 @@ const productSlice= createSlice({
   name:"Products",
   initialState:initialState,
   reducers: {
+
+
+   addItemToProduct: (state,action)=> {
+
+      //FSA format => meta,payload
+       console.log("addItemToProduct type called is:"+action.type); //unique string
+       console.log("addItemToProduct product called is:"+JSON.stringify(action.payload));
+       
+       
+       //state.products
+
+        let products=state.products;
+
+        products.push(action.payload);
+        state.products= products;
+
+       }
+
+    
+    ,
    filterProducts: (state,action)=>{
 
   const filteredData= action.payload.products.filter((eachProduct)=>
@@ -56,5 +76,5 @@ const productSlice= createSlice({
 
 });
 
-export const {filterProducts,filterByPrice}= productSlice.actions;
+export const {filterProducts,filterByPrice,addItemToProduct}= productSlice.actions;
 export default productSlice.reducer;
