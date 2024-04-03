@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { getProducts } from '../../Redux/Product/actions';
 import { addCartItem } from '../../Redux/Cart/cartSlice';
 import { Link } from 'react-router-dom';
+import { addItemToProduct } from '../../Redux/Product/productSlice';
 //variable destructuring of props
 const Products=({typeOfProducts,showProducts, changeMainComponentVariable,numberOfProducts})=>{
 
@@ -27,17 +28,30 @@ if(showProducts)
 
  //useState
 
+ //let [var1,setVar1]=useState(3);
+ //var1=3;
+
  //react can track variable changes using useState mostly
 
     let productData= useSelector(state=>state.productReducer.products);
-    
+   // productData.push
+
+    console.log(JSON.stringify(productData)+"length is:"+productData.length +":"+productData[0]);
     let cartData=useSelector(state=>state.cartReducer)
     console.log("component created:"+showProducts+":"+numberOfProducts);
     let dispatch= useDispatch();
     useEffect(()=>{
 
+      //entry point for products component
+
         console.log("use effect called:"+showProducts);
          dispatch(getProducts());
+
+         
+         
+
+        
+         
 
          return function()
          {
@@ -52,6 +66,9 @@ if(showProducts)
     }, [] )
 
     const addToCart= (product)=>{
+
+     // let productData={"id":10,"product_name":"Torn Tshirt","category_id":7,"product_img":"shop-9.jpg","price":115,"created_on":"2023-10-26 17:02:07"};
+    //  dispatch(addItemToProduct(productData));
 
 
       product={...product,quantity:1};
@@ -70,6 +87,8 @@ if(showProducts)
       productDataNew.push(productData[i]);
       }
     }
+
+    
     
     return(
  
@@ -78,7 +97,7 @@ if(showProducts)
         <button onClick={()=>changeMainComponentVariable(40)}>Change main component variable</button>
 
 
-    {showProducts &&   productDataNew.map((eachProduct,index)=>{
+    {showProducts &&   productData.map((eachProduct,index)=>{
 
             
 return(
