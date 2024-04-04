@@ -1,10 +1,11 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useMemo,useRef,useState } from 'react'
 import './_side-nav.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import accordionSlice from '../../Redux/Accordion/accordionSlice'
 import { getCategories } from '../../Redux/Category/actions'
-import { filterByPrice, filterProducts } from '../../Redux/Product/productSlice'
+import { addItemToProduct, filterByPrice, filterProducts } from '../../Redux/Product/productSlice'
 import CategoriesContext from '../../Context/CategoriesContext'
+import { objectGroup } from 'fontawesome'
 const SideNav = ({setNumberOfProducts,showProducts,setShowProducts}) => {
 
     let accordionData= useSelector(state=>state.categoryReducer.categories);
@@ -36,6 +37,65 @@ const SideNav = ({setNumberOfProducts,showProducts,setShowProducts}) => {
 
    },[fetchedProductData.status]);
 
+   
+   const [recompute,setRecompute] = useState(false);
+
+    //objects in javascripts are structured has hashmaps
+   // object[functionName]= ()
+    let table= {};
+   // table[functionName][value1][value2]=
+   //LRU cache implementation  =>memoisation
+   
+    const expensiveOperation= (key)=>
+   {
+
+   if(!table[key])
+   {
+     //calculate the value and store it in the hash table/map
+     //perform the expensive calculation
+     //store it and return the stored hash value for the given key or set of keys
+
+   }
+   else
+   {
+    return table[key];
+   }
+
+   }
+
+   const expensiveFetchOperation = () => {
+    
+    console.log("calculating the operation");
+    let result = 0;
+    //fetch is taking a lot of time , we are mimicking this 
+    for (let i = 0; i < 1000000000; i++) {
+        result += 1;
+
+    }
+    return result;
+};
+
+// Using useMemo to memoize the result based on count
+const result = useMemo(() => expensiveFetchOperation(), [recompute]);
+
+//first time, result will be called
+   const [memoisedValue,setMemoisedValue] = useState(result);
+
+
+
+
+ const getMemoisedValue =function()
+ {
+    var startTime = performance.now()
+
+console.log("calculated value:"+result);
+var endTime = performance.now()
+console.log("time taken for memoised operation:");
+console.log(endTime-startTime);
+
+
+ }
+
 
     const filterData=(selectedCategory) =>
     {
@@ -45,6 +105,13 @@ const SideNav = ({setNumberOfProducts,showProducts,setShowProducts}) => {
     }
 
 
+    function randomIntBetweenInterval(min, max) { // min and max included 
+        return Math.floor(Math.random() * (max - min + 1) + min)
+      }
+      
+
+//      let buttonRef= useRef();
+      //buttonRef.current.
 
   return (
 
@@ -60,9 +127,16 @@ const SideNav = ({setNumberOfProducts,showProducts,setShowProducts}) => {
             <h3>Category</h3>
             <p>{stateVar}</p>
             <p>Set number of products: <input type="number" onChange={(e)=>setNumberOfProducts(e.target.value)} />    </p>
-            <button onClick={()=>{setShowProducts(!showProducts)}}> Click to show or hide products</button>
+            <button   onClick={()=>{setShowProducts(!showProducts)}}> Click to show or hide products</button>
     
             <button onClick={()=>{setStateVar(20)}}>Click me</button>
+            <button onClick={()=>{setRecompute(!recompute);getMemoisedValue();}}>Click to recompute value with  toggling </button>
+            <button onClick={()=>{getMemoisedValue();}}>Click to recompute value without  toggling </button>
+        
+            <p>Memoised value is:{memoisedValue}</p>
+           
+            <button onClick={()=>{dispatch(addItemToProduct({"id":randomIntBetweenInterval(20,100),"product_name":"Torn Tshirt","category_id":7,"product_img":"shop-9.jpg","price":20,"created_on":"2023-10-26 17:02:07"}))}}>Add New Product</button>
+            
         </div>
 
 

@@ -241,6 +241,22 @@ we want the component state to change regardless of being viewed or not
 
 asynchronous data management 
 
+the useCallback hook is primarily concerned with optimizing the performance of your components by memoizing callback functions. In React, when a component re-renders, its child components also re-render. If these child components receive callback functions as props, they might trigger unnecessary re-renders if those callback functions are recreated in every render cycle.
+
+
+Virtual DOM
+toBeRendered Tree 
+currentlyRendered Tree 
+it renders only differences on the physical dom  based on child elements and keys to improve browser performance
+
+if the child component is destroyed or recreated, then the entire child hierarchy of that child component is also destroyed or recreated 
+ 
+
+
+Memoization //Caching 
+Python LRU Cache =>memoization 
+
+
 
 
 

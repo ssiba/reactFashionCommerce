@@ -97,15 +97,18 @@ if(showProducts)
         <button onClick={()=>changeMainComponentVariable(40)}>Change main component variable</button>
 
 
-    {showProducts &&   productData.map((eachProduct,index)=>{
+    {showProducts &&   productDataNew.map((eachProduct,index)=>{
 
             
 return(
-          <div className='mx-5 p-3 product-card'>
+          <div className='mx-5 p-3 product-card' key={eachProduct.id}>
 <Link to="/productdetails" state={{product:eachProduct}} >
   
             <div className='product-image-container'>
-                 <img src={require('../../assets/images/shop/'+  eachProduct.product_img)}/>
+                  <img src={require('../../assets/images/shop/'+  eachProduct.product_img)}/> 
+                {/* <img src={eachProduct.product_img} /> */}
+                 
+                 <p> id is: {eachProduct.id}</p>
 
 
             </div>

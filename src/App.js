@@ -29,14 +29,15 @@ function App() {
 
     //useState where state is for the class component's state
     state = {
-      hasError: false,
-      error:"default error"
+      hasError: false
+      
     };
   
     //change the state over here
     static getDerivedStateFromError(error) {
       return {
-        hasError: true
+        hasError: true,
+        error
         
       };
     }
@@ -46,16 +47,16 @@ function App() {
     componentDidCatch(error, info) {
   
       
-      this.state.error= error; 
+      //this.state.error= error; 
     
-      console.log("Error caused is:"+error, info);
+      //console.log("Error caused is:"+error, info);
     }
   
   
     //render conditionally based on the error
     render() {
       if (this.state.hasError) {
-        return <h1>An error has occurred:{this.state.error}.</h1>;
+        return <h1>An error has occurred:{this.state.error && this.state.error.message}.</h1>;
         
       }
       //else
@@ -71,7 +72,6 @@ function App() {
   
   
   return  (
-    <ErrorBoundary>
     <div className='App'>
 <TopNav  />
 <CatNav />
@@ -82,7 +82,6 @@ function App() {
   <Route path="/productdetails" element={<ProductDetails />} />
 </Routes>
   </div>
-  </ErrorBoundary>
   );
 
 }
