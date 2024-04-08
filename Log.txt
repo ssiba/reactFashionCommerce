@@ -256,7 +256,41 @@ if the child component is destroyed or recreated, then the entire child hierarch
 Memoization //Caching 
 Python LRU Cache =>memoization 
 
+useCallback=> very similar to useMemo 
+
+difference is 
+useMemo=> {fn, dependencies}
+
+useCallback {()=>{fn()},dependencies}  
+
+
+useMemo=> way of caching expensive results which are repeatedly used in the application 
+useCallback for caching the function rather than the result 
 
 
 
+//RTL  =?
+//Jest => javascript ecosystem framework agnostic testing library 
+Jest is highly recommended 
+mern mean => frontend and backend 
 
+  jest => frontend testing and api unit testing 
+
+  e2e => cypress or selenium  
+
+ // TDD is not the first thing which comes to mind 
+ //write code based on how u will test it 
+ //write tests before u write code 
+
+
+only synthetic events are avaiable to react components and the elements defined in the components 
+they are nothing but wrappers on dom elements 
+but they are fired by the react virtual DOM algorithm based on conditions 
+react converts synthetic events into platform specific events 
+
+ie 
+firefox 
+chrome 
+safari 
+
+react 18 has batching of events 

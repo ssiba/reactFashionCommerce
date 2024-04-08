@@ -1,4 +1,4 @@
-import React, { useEffect,useMemo,useRef,useState } from 'react'
+import React, { useCallback, useEffect,useMemo,useRef,useState } from 'react'
 import './_side-nav.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import accordionSlice from '../../Redux/Accordion/accordionSlice'
@@ -75,8 +75,47 @@ const SideNav = ({setNumberOfProducts,showProducts,setShowProducts}) => {
     return result;
 };
 
+const expensiveFetchOperationForCallback = () => {
+    
+    console.log("calculating the callback operation");
+    let result = 0;
+    //fetch is taking a lot of time , we are mimicking this 
+    for (let i = 0; i < 1000000000; i++) {
+        result += 1;
+
+    }
+
+    console.log("callback result is:"+result);
+    return result;
+};
+
+
+//naming is based on useSomething
+//useState
+//useMemo 
+//useCallback
+//useEffect 
+//entrypoint without side effects 
+/*
+ react
+ pure component => should not perform any side effects
+ 1) affecting the DOM directly
+ 2) if any inputs are passed to the component, it should not affect the inputs
+ 
+   <Component prop1={parentComponent} />
+
+*/
+
 // Using useMemo to memoize the result based on count
+
+//useMemo is a value pointer or reference in which the value referred to can change based on the dependencies , for tracking values
 const result = useMemo(() => expensiveFetchOperation(), [recompute]);
+
+//useCallback is a function pointer or reference in which the function referred to can change based on the dependencies
+//for tracking the function
+//expensiveFetchOperationForCallback
+  const callbackHandler = useCallback(expensiveFetchOperationForCallback,[recompute]);
+
 
 //first time, result will be called
    const [memoisedValue,setMemoisedValue] = useState(result);
@@ -132,6 +171,8 @@ console.log(endTime-startTime);
             <button onClick={()=>{setStateVar(20)}}>Click me</button>
             <button onClick={()=>{setRecompute(!recompute);getMemoisedValue();}}>Click to recompute value with  toggling </button>
             <button onClick={()=>{getMemoisedValue();}}>Click to recompute value without  toggling </button>
+            <button onClick={callbackHandler}> Click for callback Handler</button>
+            <button onClick={callbackHandler}> Click for callback Handler 2</button>
         
             <p>Memoised value is:{memoisedValue}</p>
            

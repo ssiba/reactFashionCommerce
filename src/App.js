@@ -49,7 +49,7 @@ function App() {
       
       //this.state.error= error; 
     
-      //console.log("Error caused is:"+error, info);
+      console.log("Error caused is:"+error, info);
     }
   
   
