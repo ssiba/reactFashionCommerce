@@ -259,13 +259,29 @@ Python LRU Cache =>memoization
 useCallback=> very similar to useMemo 
 
 difference is 
-useMemo=> {fn, dependencies}
+resRef=useMemo=> {fn, []}
 
-useCallback {()=>{fn()},dependencies}  
+funcRef= useCallback {()=>{fn()},[]}  
+useRef => refer to an element in the dom
+
+useState 
 
 
 useMemo=> way of caching expensive results which are repeatedly used in the application 
 useCallback for caching the function rather than the result 
+
+React's biggest advantage=> Simplicity 
+
+//component based testing 
+1) is the text being rendered as expected 
+2) are the css styles being rendered as expected 
+3) are the child components being rendered as expected 
+
+
+
+
+
+// api based testing 
 
 
 
@@ -275,6 +291,17 @@ Jest is highly recommended
 mern mean => frontend and backend 
 
   jest => frontend testing and api unit testing 
+
+jsdom => browser dom emulation library 
+
+  jest can simulate the browser dom even in nodejs  environment 
+   
+   //SSR => server side rendering  (component logic, api logic )
+//pros=>privacy, security, seo , browser sees only html-js-css 
+//cons=> more talking to the server meaning more bandwidth consumption , reduced traffic possibility
+
+//react => aws  s3+ cloudfront+ waf(DDOS,MIM) , azure blob storage+ frontdoor + azure cdn, (we dont typically do this as frequently on gcp ) 
+
 
   e2e => cypress or selenium  
 

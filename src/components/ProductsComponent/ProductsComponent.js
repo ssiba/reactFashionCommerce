@@ -101,6 +101,7 @@ if(showProducts)
 
             
 return(
+  
           <div className='mx-5 p-3 product-card' key={eachProduct.id}>
 <Link to="/productdetails" state={{product:eachProduct}} >
   
